@@ -11,7 +11,9 @@ ticker = "ISCTR.IS"
 df = yf.download(
     ticker,
     period="2d",
-    interval="15m"
+    interval="15m",
+    auto_adjust=True,
+    progress=False
 )
 
 df["Close"] = df["Close"].squeeze()
