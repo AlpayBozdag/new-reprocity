@@ -1,31 +1,30 @@
-[app]
 
-title = AYNA V5.3
-package.name = aynav53
-package.domain = org.alpay
+name: Build APK
 
-source.dir = .
-source.include_exts = py,kv,png,jpg,jpeg,csv,json,txt
+on:
+  workflow_dispatch:
 
-version = 5.3
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
 
-requirements = python3,kivy==2.3.1
+    steps:
+      - name: Proje dosyalarını indir
+        uses: actions/checkout@v4
 
-orientation = portrait
-fullscreen = 0
+      - name: Resmi Buildozer ile APK derle
+        run: |
+          docker pull ghcr.io/kivy/buildozer:latest
+          docker run --rm \
+            -v "$PWD":/home/user/hostcwd \
+            ghcr.io/kivy/buildozer:latest \
+            android debug
 
-android.api = 36
-android.minapi = 24
-android.ndk = 29
-android.ndk_api = 24
-android.archs = arm64-v8a
-
-android.permissions = READ_MEDIA_IMAGES,READ_MEDIA_VIDEO
-android.accept_sdk_license = True
-
-p4a.bootstrap = sdl2
-
-[buildozer]
-
-log_level = 2
-warn_on_root = 1
+      - name: APK dosyasını yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: AYNA-V5-3-APK
+          path: bin/*.apk
+          if-no-files-found: error
+          retention-days: 14
