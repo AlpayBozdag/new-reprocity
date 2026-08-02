@@ -1,4 +1,3 @@
-
 name: Build APK
 
 on:
@@ -6,38 +5,20 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 120
 
     steps:
       - name: Proje dosyalarını indir
         uses: actions/checkout@v4
 
-      - name: Python 3.11 kur
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Gerekli sistem paketlerini kur
+      - name: Resmi Buildozer ile APK derle
         run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            git zip unzip openjdk-17-jdk \
-            autoconf automake libtool pkg-config \
-            zlib1g-dev libncurses5-dev libncursesw5-dev \
-            libtinfo6 cmake libffi-dev libssl-dev \
-            build-essential ccache
-
-      - name: Buildozer kur
-        run: |
-          python -m pip install --upgrade pip setuptools wheel
-          python -m pip install "cython<3" buildozer
-
-      - name: APK derle
-        env:
-          BUILDOZER_WARN_ON_ROOT: "0"
-        run: |
-          yes | buildozer -v android debug
+          docker pull ghcr.io/kivy/buildozer:latest
+          docker run --rm \
+            -v "$PWD":/home/user/hostcwd \
+            ghcr.io/kivy/buildozer:latest \
+            android debug
 
       - name: APK dosyasını yükle
         uses: actions/upload-artifact@v4
