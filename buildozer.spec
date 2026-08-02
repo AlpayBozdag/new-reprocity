@@ -23,7 +23,6 @@ android.archs = arm64-v8a
 
 android.permissions = READ_MEDIA_IMAGES,READ_MEDIA_VIDEO
 
-p4a.branch = develop
 p4a.bootstrap = sdl2
 
 [buildozer]
