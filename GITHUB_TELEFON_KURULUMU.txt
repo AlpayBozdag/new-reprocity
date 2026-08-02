@@ -1,0 +1,35 @@
+AYNA V5.3 APK - TELEFONDAN GITHUB İLE DERLEME
+
+1. GitHub'da yeni bir depo oluştur.
+   Önerilen ad: AYNA-V5-3-APK
+
+2. Bu ZIP'i telefonda çıkar.
+
+3. ZIP içindeki TÜM dosya ve klasörleri deponun ana sayfasına yükle:
+   - main.py
+   - buildozer.spec
+   - README_TR.txt
+   - .github klasörü
+
+   Önemli: .github gizli klasör gibi görünebilir; mutlaka yüklensin.
+
+4. GitHub deposunda üst menüden Actions bölümüne gir.
+
+5. Sol tarafta "AYNA APK Derle" iş akışını aç.
+
+6. "Run workflow" düğmesine, sonra tekrar yeşil "Run workflow" düğmesine bas.
+
+7. Derleme ilk seferde yaklaşık 20-60 dakika sürebilir.
+
+8. Yeşil tik gelince tamamlanan çalışmayı aç.
+
+9. Sayfanın altındaki Artifacts bölümünden:
+   AYNA-V5-3-APK
+   dosyasını indir.
+
+10. İnen ZIP'i çıkar; içindeki .apk dosyasını telefona kur.
+
+Notlar:
+- GitHub APK'yi artifact olarak ZIP içinde verir.
+- Android, bilinmeyen kaynaklardan yükleme izni isteyebilir.
+- Derleme kırmızı hata verirse ekran görüntüsünü gönder.
